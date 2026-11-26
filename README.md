@@ -38,6 +38,10 @@ The demo command refuses to overwrite existing accounts or records.
 
 ## Production setup
 
+## Render deployment
+
+The repository root includes `render.yaml` for a Render web service. It installs the pinned Python dependencies, runs Waitress on Render's assigned port, enables secure cookies, and generates a private session secret. Before creating the service, supply a managed PostgreSQL `DATABASE_URL` through Render's protected environment settings; do not use SQLite or commit a connection URL. After the first deploy, run `python -m flask --app app setup` from the Render Shell to create the initial Manager and Owner accounts, then test the public HTTPS address before sharing it with clients.
+
 Provision an empty PostgreSQL database and a dedicated database account. Set environment variables privately on the server; do not commit credentials:
 
 ```powershell
